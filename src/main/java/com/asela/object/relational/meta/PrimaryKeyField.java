@@ -17,4 +17,8 @@ public class PrimaryKeyField {
     public String getName() {
         return field.getName();
     }
+
+    public Field getField() {
+        return field;
+    }
 }

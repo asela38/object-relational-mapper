@@ -6,7 +6,9 @@ import com.asela.object.relational.entity.Person;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class MetaModel<T> {
 
@@ -45,5 +47,17 @@ public class MetaModel<T> {
         }
 
         return fields;
+    }
+
+    public String buildInsertRequest() {
+
+        List<String> fields = new LinkedList<>();
+        fields.add(getPrimaryKeysField().getName());
+        getColumnFields().stream().map(ColumnField::getName).forEach(fields::add);
+
+        String columns = fields.stream().collect(Collectors.joining(", ","(",")"));
+
+
+        return String.format("insert into %s %s values %s", clss.getSimpleName(), columns, columns.replaceAll("\\w+", "?"));
     }
 }
