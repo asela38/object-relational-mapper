@@ -51,13 +51,24 @@ public class MetaModel<T> {
 
     public String buildInsertRequest() {
 
-        List<String> fields = new LinkedList<>();
-        fields.add(getPrimaryKeysField().getName());
-        getColumnFields().stream().map(ColumnField::getName).forEach(fields::add);
+        List<String> fields = getFields();
 
-        String columns = fields.stream().collect(Collectors.joining(", ","(",")"));
+        String columns = fields.stream().collect(Collectors.joining(", ", "(", ")"));
 
 
         return String.format("insert into %s %s values %s", clss.getSimpleName(), columns, columns.replaceAll("\\w+", "?"));
+    }
+
+    private List<String> getFields() {
+        List<String> fields = new LinkedList<>();
+        fields.add(getPrimaryKeysField().getName());
+        getColumnFields().stream().map(ColumnField::getName).forEach(fields::add);
+        return fields;
+    }
+
+    public String buildSelectRequest() {
+        PrimaryKeyField primaryKeysField = getPrimaryKeysField();
+        return String.format("Select %s From %s Where %s = ? ", String.join(", ", getFields()), clss.getSimpleName(),
+                primaryKeysField.getName());
     }
 }

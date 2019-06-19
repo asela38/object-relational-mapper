@@ -32,11 +32,11 @@ public class EntityManagerTest {
     }
 
     @Test
-    public void entityManagerFind() throws SQLException, IllegalAccessException {
+    public void entityManagerFind() throws Exception {
 
         EntityManger<Person> entityManger = EntityManger.of(Person.class);
 
-        Person person = entityManger.find(1);
+        Person person = entityManger.find(7);
 
         System.out.println(person);
 
