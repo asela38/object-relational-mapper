@@ -15,7 +15,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public  abstract class AbstractEntityManger<T> implements EntityManger<T> {
 
 
-    private AtomicInteger idGen = new AtomicInteger(10);
+    private AtomicInteger idGen = new AtomicInteger(20);
 
     private Class<T> clss;
 

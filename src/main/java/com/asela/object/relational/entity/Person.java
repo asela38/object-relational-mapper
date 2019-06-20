@@ -6,13 +6,13 @@ import com.google.common.base.MoreObjects;
 
 public class Person {
 
-    @PrimaryKey
+    @PrimaryKey(name = "id")
     private int id;
 
-    @Column
+    @Column(name = "name")
     private String name;
 
-    @Column
+    @Column(name = "age")
     private int age;
 
     public Person(String name, int age) {

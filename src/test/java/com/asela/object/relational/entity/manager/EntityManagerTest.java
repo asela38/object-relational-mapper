@@ -36,7 +36,7 @@ public class EntityManagerTest {
 
         EntityManger<Person> entityManger = EntityManger.of(Person.class);
 
-        Person person = entityManger.find(7);
+        Person person = entityManger.find(20);
 
         System.out.println(person);
 
